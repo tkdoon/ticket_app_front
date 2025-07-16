@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
+import BasicCard from "./component/card";
+import fetchTicketList from "./module/fetchTicketList";
 
 function App() {
+  const [ticketList, setTicketList] = useState([]);
+  useEffect(() => {
+    fetchTicketList(setTicketList);
+  }, []);
+
+  const handleTicketList = () => {
+    fetchTicketList(setTicketList);
+  };
+  // const ticketList = [
+  //   { title: "xxxxxxxxxx", header: "yyyyyyyyyyy", description: "zzzzzzzzzzz" },
+  //   { title: "xxxxxxxxxx", header: "yyyyyyyyyyy", description: "zzzzzzzzzzz" },
+  // ]; //temp
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {ticketList.map((ticket, i) => {
+        {
+          console.log(ticket.ticketId);
+        }
+        return (
+          <BasicCard
+            key={i}
+            title={ticket.title}
+            expiringDate={ticket.expiringDate}
+            description={ticket.description}
+            ticketId={ticket.ticketId}
+            handleTicketList={handleTicketList}
+          />
+        );
+      })}
     </div>
   );
 }
