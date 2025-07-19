@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import fetchTicketList from "../App";
+import { server_url } from "../config";
 
 const bull = (
   <Box
@@ -18,7 +19,7 @@ const bull = (
 
 export default function BasicCard(props) {
   const usingTicket = async () => {
-    await fetch("http://localhost:8080/ticket/use", {
+    await fetch(server_url + "/ticket/use", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

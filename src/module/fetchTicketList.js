@@ -1,5 +1,7 @@
+import { server_url } from "../config";
+
 const fetchTicketList = async (setTicketList) => {
-  await fetch("http://localhost:8080/ticket/check")
+  await fetch(server_url + "/ticket/check")
     .then((response) => {
       if (!response.ok) {
         throw new Error("ネットワークエラーが発生しました");
