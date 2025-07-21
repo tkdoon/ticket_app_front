@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import BasicCard from "./component/card";
 import fetchTicketList from "./module/fetchTicketList";
+import BasicModal from "./component/confirmModal";
 
 function App() {
   const [ticketList, setTicketList] = useState([]);
