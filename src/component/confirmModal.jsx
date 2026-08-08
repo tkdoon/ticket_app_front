@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { server_url } from "../config";
+import apiFetch from "../module/apiFetch";
 
 const style = {
   position: "absolute",
@@ -19,7 +19,7 @@ const style = {
 
 export default function BasicModal(props) {
   const usingTicket = async () => {
-    await fetch(server_url + "/ticket/use", {
+    await apiFetch("/ticket/use", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

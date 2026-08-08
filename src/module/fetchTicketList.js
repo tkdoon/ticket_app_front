@@ -1,19 +1,16 @@
-import { server_url } from "../config";
+import apiFetch from "./apiFetch";
 
 const fetchTicketList = async (setTicketList) => {
-  await fetch(server_url + "/ticket/check")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("ネットワークエラーが発生しました");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      setTicketList(data.ticketList);
-    })
-    .catch((error) => {
-      console.log("error", error);
-    });
+  try {
+    const response = await apiFetch("/ticket/check");
+    const data = await response.json();
+    setTicketList(data.ticketList);
+    return true;
+  } catch (error) {
+    console.log("error", error);
+    setTicketList([]);
+    return false;
+  }
 };
 
 export default fetchTicketList;

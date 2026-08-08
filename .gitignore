@@ -23,3 +23,6 @@ yarn-debug.log*
 yarn-error.log*
 
 .vercel
+
+# MCP secrets
+.mcp-secrets
