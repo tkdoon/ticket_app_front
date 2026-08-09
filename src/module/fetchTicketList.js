@@ -1,14 +1,16 @@
 import apiFetch from "./apiFetch";
 
-const fetchTicketList = async (setTicketList) => {
+const fetchTicketList = async (setReceivedTicketList, setSentTicketList) => {
   try {
     const response = await apiFetch("/ticket/check");
     const data = await response.json();
-    setTicketList(data.ticketList);
+    setReceivedTicketList(data.receivedTicketList);
+    setSentTicketList(data.sentTicketList);
     return true;
   } catch (error) {
     console.log("error", error);
-    setTicketList([]);
+    setReceivedTicketList([]);
+    setSentTicketList([]);
     return false;
   }
 };

@@ -34,6 +34,7 @@ const navItems = [
 
 function App() {
   const [ticketList, setTicketList] = useState([]);
+  const [sentTicketList, setSentTicketList] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -55,7 +56,7 @@ function App() {
   }, []);
 
   const handleTicketList = useCallback(() => {
-    fetchTicketList(setTicketList).then((ok) => {
+    fetchTicketList(setTicketList, setSentTicketList).then((ok) => {
       if (ok) setIsLoggedIn(true);
     });
   }, []);
@@ -64,6 +65,7 @@ function App() {
     try {
       await logout();
       setTicketList([]);
+      setSentTicketList([]);
       setIsLoggedIn(false);
       alert("ログアウトしました");
     } catch {
@@ -127,6 +129,7 @@ function App() {
           element={
             <HomePage
               ticketList={ticketList}
+              sentTicketList={sentTicketList}
               isLoggedIn={isLoggedIn}
               handleTicketList={handleTicketList}
             />
