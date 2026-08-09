@@ -1,8 +1,13 @@
+import { useEffect } from "react";
 import BasicCard from "../component/card";
 import { server_url } from "../config";
 import Button from "@mui/material/Button";
 
 export default function HomePage({ ticketList, isLoggedIn, handleTicketList }) {
+  useEffect(() => {
+    handleTicketList();
+  }, [handleTicketList]);
+
   return (
     <div className="App">
       {ticketList.map((ticket, i) => (

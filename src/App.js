@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route, Link as RouterLink } from "react-router-dom";
 import fetchTicketList from "./module/fetchTicketList";
@@ -18,12 +18,18 @@ import Box from "@mui/material/Box";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import GroupIcon from "@mui/icons-material/Group";
 import HomePage from "./pages/HomePage";
 import CreateTicketPage from "./pages/CreateTicketPage";
+import ProfilePage from "./pages/ProfilePage";
+import FriendsPage from "./pages/FriendsPage";
 
 const navItems = [
   { label: "ホーム", path: "/", icon: <HomeIcon /> },
   { label: "チケット作成", path: "/tickets/new", icon: <AddCircleOutlineIcon /> },
+  { label: "友達", path: "/friends", icon: <GroupIcon /> },
+  { label: "プロフィール", path: "/profile", icon: <AccountCircleIcon /> },
 ];
 
 function App() {
@@ -46,14 +52,13 @@ function App() {
         alert("ログインに失敗しました");
       }
     }
+  }, []);
+
+  const handleTicketList = useCallback(() => {
     fetchTicketList(setTicketList).then((ok) => {
       if (ok) setIsLoggedIn(true);
     });
   }, []);
-
-  const handleTicketList = () => {
-    fetchTicketList(setTicketList);
-  };
 
   const handleLogout = async () => {
     try {
@@ -128,6 +133,8 @@ function App() {
           }
         />
         <Route path="/tickets/new" element={<CreateTicketPage />} />
+        <Route path="/friends" element={<FriendsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </BrowserRouter>
   );
